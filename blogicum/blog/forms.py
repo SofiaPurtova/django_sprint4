@@ -4,15 +4,16 @@ from django.utils import timezone
 from .models import Comment, Post
 
 
+# Форма для создания/редактирования поста
 class CreatePostForm(forms.ModelForm):
     pub_date = forms.DateTimeField(
-        initial=timezone.now,
+        initial=timezone.now,  # Устанавливаем текущую дату/время по умолчанию
         required=True,
         widget=forms.DateTimeInput(
             attrs={
                 'type': 'datetime-local',
             },
-            format='%Y-%m-%dT%H:%M',
+            format='%Y-%m-%dT%H:%M',  # Формат даты/времени
         ),
     )
 
@@ -26,10 +27,11 @@ class CreatePostForm(forms.ModelForm):
             'location',
             'category',
             'is_published',
-        )
+        )  # Поля, которые будут в форме
 
 
+# Форма для создания комментария
 class CreateCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ("text",)
+        fields = ("text",)  # Только поле текста комментария
